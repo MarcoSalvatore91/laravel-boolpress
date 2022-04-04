@@ -28,31 +28,43 @@
         <p v-else>Non ci sono post</p>
     </div>
 
+    <NavPage :pagination="pagination" @page-change="getPosts" />
+
+
 </div>
 </template>
 
 <script>
 import Loader from '../Loader.vue';
+import NavPage from '../NavPage.vue';
 
 export default {
 name: "PostsList",
 components: {
     Loader,
+    NavPage,
 },
 
 data() {
     return {
         posts: [],
+        pagination: {},
         isLoading: false,
     };
 },
 
 methods: {
-    getPosts() {
+    getPosts(page = 1) {
         this.isLoading = true;
-        axios.get('http://localhost:8000/api/posts').then(res => {
-            this.posts = res.data.data;
-        }).catch(err => {
+        axios.get('http://localhost:8000/api/posts?page=' + page).then((res) => {
+            const {data, current_page, last_page} = res.data;
+
+            this.posts = data;
+            this.pagination = {
+                currentPage: current_page,
+                lastPage: last_page,
+            }
+        }).catch((err) => {
              console.error(err)
         }).then(() => {
             this.isLoading = false;
