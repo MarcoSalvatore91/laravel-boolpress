@@ -12,8 +12,8 @@
                     <p class="card-text">{{ post.content }}</p>
                 </div>
                 <ul class="list-group list-group-flush">
-                    <li class="list-group-item"><strong>Creato il: </strong>{{ post.created_at }}</li>
-                    <li class="list-group-item"><strong>Modificato il: </strong>{{ post.updated_at }}</li>
+                    <li class="list-group-item"><strong>Creato il: </strong>{{ getDate(post.created_at) }}</li>
+                    <li class="list-group-item"><strong>Modificato il: </strong>{{ getDate(post.updated_at) }}</li>
                 </ul>
             </div>
         </div>
@@ -50,6 +50,19 @@ methods: {
             this.isLoading = false;
         });
     },
+
+    getDate(date) {
+        const postDate = new Date(date);
+        const day = postDate.getDate();
+        const month = postDate.getMonth() + 1;
+        const year = postDate.getFullYear();
+
+        const hours = postDate.getHours();
+        const minutes = postDate.getMinutes();
+        const seconds = postDate.getSeconds();
+
+        return `${day}/${month}/${year}  ${hours}:${minutes}:${seconds}`;
+    }
 },
 mounted() {
     this.getPosts();
