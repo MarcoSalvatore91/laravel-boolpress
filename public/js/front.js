@@ -2040,6 +2040,16 @@ __webpack_require__.r(__webpack_exports__);
       }).then(function () {
         _this.isLoading = false;
       });
+    },
+    getDate: function getDate(date) {
+      var postDate = new Date(date);
+      var day = postDate.getDate();
+      var month = postDate.getMonth() + 1;
+      var year = postDate.getFullYear();
+      var hours = postDate.getHours();
+      var minutes = postDate.getMinutes();
+      var seconds = postDate.getSeconds();
+      return "".concat(day, "/").concat(month, "/").concat(year, "  ").concat(hours, ":").concat(minutes, ":").concat(seconds);
     }
   },
   mounted: function mounted() {
@@ -38465,12 +38475,12 @@ var render = function () {
                           [
                             _c("li", { staticClass: "list-group-item" }, [
                               _c("strong", [_vm._v("Creato il: ")]),
-                              _vm._v(_vm._s(post.created_at)),
+                              _vm._v(_vm._s(_vm.getDate(post.created_at))),
                             ]),
                             _vm._v(" "),
                             _c("li", { staticClass: "list-group-item" }, [
                               _c("strong", [_vm._v("Modificato il: ")]),
-                              _vm._v(_vm._s(post.updated_at)),
+                              _vm._v(_vm._s(_vm.getDate(post.updated_at))),
                             ]),
                           ]
                         ),
