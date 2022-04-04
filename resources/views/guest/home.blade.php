@@ -11,7 +11,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200;600&display=swap" rel="stylesheet">
 
     <!-- Styles -->
-    <style>
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <!-- <style>
         html,
         body {
             background-color: #fff;
@@ -63,12 +64,15 @@
         .m-b-md {
             margin-bottom: 30px;
         }
-    </style>
+    </style> -->
 </head>
 
 <body>
     <div class="flex-center position-ref full-height">
-        @if (Route::has('login'))
+
+        <!-- Commento header -->
+
+        <!-- @if (Route::has('login'))
         <div class="top-right links">
             @auth
             <a href="{{ url('/admin') }}">Home</a>
@@ -80,7 +84,7 @@
             @endif
             @endauth
         </div>
-        @endif
+        @endif -->
 
         <div id="root"></div>
     </div>

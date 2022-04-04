@@ -7,6 +7,7 @@
  require('./bootstrap');
 
 window.Vue = require('vue');
+axios = require('axios');
 
 import App from './components/App.vue';
 
