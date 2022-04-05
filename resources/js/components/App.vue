@@ -2,7 +2,7 @@
     <div>
         <Header class="text-white" :title="title" />
         <main>
-            <div><PostsList /></div>
+            <router-view></router-view>
         </main>
     </div>
 </template>
