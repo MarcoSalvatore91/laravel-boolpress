@@ -6,7 +6,9 @@
 
     <div v-else>
         <div v-if="posts.length">
-            <PostCard :posts='posts' :getDate='getDate'/>
+            <div v-for="post in posts" :key="post.id">
+                <PostCard :post='post'/>
+            </div>
         </div>
         <p v-else>Non ci sono post</p>
     </div>
@@ -55,19 +57,6 @@ methods: {
             this.isLoading = false;
         });
     },
-
-    getDate(date) {
-        const postDate = new Date(date);
-        const day = postDate.getDate();
-        const month = postDate.getMonth() + 1;
-        const year = postDate.getFullYear();
-
-        const hours = postDate.getHours();
-        const minutes = postDate.getMinutes();
-        const seconds = postDate.getSeconds();
-
-        return `${day}/${month}/${year}  ${hours}:${minutes}:${seconds}`;
-    }
 },
 mounted() {
     this.getPosts();
