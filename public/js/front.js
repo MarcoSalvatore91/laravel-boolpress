@@ -1951,6 +1951,21 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Header',
   props: ["title"]
@@ -38518,7 +38533,7 @@ var render = function () {
     [
       _c("Header", { staticClass: "text-white", attrs: { title: _vm.title } }),
       _vm._v(" "),
-      _c("main", [_c("router-view")], 1),
+      _c("main", { staticClass: "mt-5" }, [_c("router-view")], 1),
     ],
     1
   )
@@ -38546,10 +38561,87 @@ var render = function () {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { attrs: { id: "head" } }, [
-    _c("h1", { staticClass: "p-3" }, [_vm._v(_vm._s(_vm.title))]),
+    _c(
+      "nav",
+      { staticClass: "navbar navbar-expand-lg navbar-dark bg-dark" },
+      [
+        _c("router-link", { staticClass: "navbar-brand", attrs: { to: "/" } }, [
+          _vm._v(_vm._s(_vm.title)),
+        ]),
+        _vm._v(" "),
+        _vm._m(0),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            staticClass: "collapse navbar-collapse",
+            attrs: { id: "navbarNav" },
+          },
+          [
+            _c("ul", { staticClass: "navbar-nav" }, [
+              _c(
+                "li",
+                { staticClass: "nav-item active" },
+                [
+                  _c(
+                    "router-link",
+                    { staticClass: "nav-link", attrs: { to: "/" } },
+                    [
+                      _vm._v("Home "),
+                      _c("span", { staticClass: "sr-only" }, [
+                        _vm._v("(current)"),
+                      ]),
+                    ]
+                  ),
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "li",
+                { staticClass: "nav-item" },
+                [
+                  _c(
+                    "router-link",
+                    {
+                      staticClass: "nav-link",
+                      attrs: { to: { name: "contacts" } },
+                    },
+                    [_vm._v("Features")]
+                  ),
+                ],
+                1
+              ),
+            ]),
+          ]
+        ),
+      ],
+      1
+    ),
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "button",
+      {
+        staticClass: "navbar-toggler",
+        attrs: {
+          type: "button",
+          "data-toggle": "collapse",
+          "data-target": "#navbarNav",
+          "aria-controls": "navbarNav",
+          "aria-expanded": "false",
+          "aria-label": "Toggle navigation",
+        },
+      },
+      [_c("span", { staticClass: "navbar-toggler-icon" })]
+    )
+  },
+]
 render._withStripped = true
 
 
@@ -38705,9 +38797,11 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("section", { attrs: { id: "contacts" } }, [
-      _c("h1", [_vm._v("Contatti")]),
-    ])
+    return _c(
+      "section",
+      { staticClass: "container", attrs: { id: "contacts" } },
+      [_c("h1", [_vm._v("Contatti")])]
+    )
   },
 ]
 render._withStripped = true
