@@ -6,6 +6,7 @@ Vue.use(VueRouter)
 import Home from './components/pages/Home.vue'
 import Contacts from './components/pages/Contacts.vue'
 import NotFoundPage from './components/pages/NotFoundPage.vue'
+import SinglePost from './components/pages/SinglePost.vue'
 
 const router = new VueRouter({
     
@@ -15,6 +16,7 @@ const router = new VueRouter({
     routes: [
         {path: '/', component: Home, name: 'home'},
         {path: '/contacts', component: Contacts, name: 'contacts'},
+        {path: '/posts/:id', component: SinglePost, name: 'single-post'},
         {path: '*', component: NotFoundPage},
     ]
 });
