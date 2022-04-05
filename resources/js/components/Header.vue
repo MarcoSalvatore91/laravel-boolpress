@@ -7,11 +7,11 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
-          <li class="nav-item active">
+          <li class="nav-item">
             <router-link class="nav-link" to="/">Home <span class="sr-only">(current)</span></router-link>
           </li>
           <li class="nav-item">
-            <router-link class="nav-link" :to="{ name: 'contacts' }">Features</router-link>
+            <router-link class="nav-link" :to="{ name: 'contacts' }">Contatti</router-link>
           </li>
         </ul>
       </div>
