@@ -9,7 +9,7 @@
                 </div>
 
                 <div>
-                    <router-link class="btn btn-primary" :to="{ name: 'single-post', params: { id: post.id } }">Info</router-link>
+                    <router-link v-if="!hideLink" class="btn btn-primary" :to="{ name: 'single-post', params: { id: post.id } }">Info</router-link>
                 </div>
 
             </div>
@@ -33,7 +33,7 @@
 export default {
 name: 'PostCard',
 
-props: ["post"],
+props: ["post", "hide-link"],
 
 methods: {
 
