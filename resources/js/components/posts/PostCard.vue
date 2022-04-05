@@ -9,7 +9,7 @@
                 </div>
 
                 <div>
-                    <router-link v-if="!hideLink" class="btn btn-primary" :to="{ name: 'single-post', params: { id: post.id } }">Info</router-link>
+                    <router-link v-if="!hideLink" class="btn btn-primary" :to="{ name: 'single-post', params: { slug: post.slug } }">Info</router-link>
                 </div>
 
             </div>
