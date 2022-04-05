@@ -1,6 +1,6 @@
 <template>
   <section id="contacts">
-
+      <h1>Contatti</h1>
   </section>
 </template>
 
