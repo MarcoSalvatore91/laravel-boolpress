@@ -1,7 +1,7 @@
 <template>
     <div>
         <Header class="text-white" :title="title" />
-        <main>
+        <main class="mt-5">
             <router-view></router-view>
         </main>
     </div>
