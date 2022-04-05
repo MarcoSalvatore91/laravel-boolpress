@@ -2192,7 +2192,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'PostCard',
-  props: ["post"],
+  props: ["post", "hide-link"],
   methods: {
     getDate: function getDate(date) {
       var postDate = new Date(date);
@@ -38990,7 +38990,7 @@ var render = function () {
     [
       _vm.isLoading && !_vm.post
         ? _c("Loader")
-        : _c("PostCard", { attrs: { post: _vm.post } }),
+        : _c("PostCard", { attrs: { post: _vm.post, "hide-link": "true" } }),
     ],
     1
   )
@@ -39044,19 +39044,21 @@ var render = function () {
               _c(
                 "div",
                 [
-                  _c(
-                    "router-link",
-                    {
-                      staticClass: "btn btn-primary",
-                      attrs: {
-                        to: {
-                          name: "single-post",
-                          params: { id: _vm.post.id },
+                  !_vm.hideLink
+                    ? _c(
+                        "router-link",
+                        {
+                          staticClass: "btn btn-primary",
+                          attrs: {
+                            to: {
+                              name: "single-post",
+                              params: { id: _vm.post.id },
+                            },
+                          },
                         },
-                      },
-                    },
-                    [_vm._v("Info")]
-                  ),
+                        [_vm._v("Info")]
+                      )
+                    : _vm._e(),
                 ],
                 1
               ),
