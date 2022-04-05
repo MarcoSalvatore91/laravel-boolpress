@@ -2107,6 +2107,8 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _posts_PostCard_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../posts/PostCard.vue */ "./resources/js/components/posts/PostCard.vue");
+/* harmony import */ var _Loader_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../Loader.vue */ "./resources/js/components/Loader.vue");
+//
 //
 //
 //
@@ -2114,10 +2116,35 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "SinglePost",
   components: {
+    Loader: _Loader_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
     PostCard: _posts_PostCard_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
+  data: function data() {
+    return {
+      isLoading: false,
+      posts: ''
+    };
+  },
+  methods: {
+    getPost: function getPost() {
+      var _this = this;
+
+      this.isLoading = true;
+      axios.get('http://localhost:8000/api/posts/' + this.$route.params.id).then(function (res) {
+        _this.post = res.data;
+      })["catch"](function (err) {
+        console.error(err);
+      }).then(function () {
+        _this.isLoading = false;
+      });
+    }
+  },
+  mounted: function mounted() {
+    this.getPost();
   }
 });
 
@@ -2165,7 +2192,19 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'PostCard',
-  props: ["posts", "getDate"]
+  props: ["post"],
+  methods: {
+    getDate: function getDate(date) {
+      var postDate = new Date(date);
+      var day = postDate.getDate();
+      var month = postDate.getMonth() + 1;
+      var year = postDate.getFullYear();
+      var hours = postDate.getHours();
+      var minutes = postDate.getMinutes();
+      var seconds = postDate.getSeconds();
+      return "".concat(day, "/").concat(month, "/").concat(year, "  ").concat(hours, ":").concat(minutes, ":").concat(seconds);
+    }
+  }
 });
 
 /***/ }),
@@ -2182,6 +2221,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Loader_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Loader.vue */ "./resources/js/components/Loader.vue");
 /* harmony import */ var _NavPage_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../NavPage.vue */ "./resources/js/components/NavPage.vue");
 /* harmony import */ var _PostCard_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./PostCard.vue */ "./resources/js/components/posts/PostCard.vue");
+//
+//
 //
 //
 //
@@ -2239,16 +2280,6 @@ __webpack_require__.r(__webpack_exports__);
       }).then(function () {
         _this.isLoading = false;
       });
-    },
-    getDate: function getDate(date) {
-      var postDate = new Date(date);
-      var day = postDate.getDate();
-      var month = postDate.getMonth() + 1;
-      var year = postDate.getFullYear();
-      var hours = postDate.getHours();
-      var minutes = postDate.getMinutes();
-      var seconds = postDate.getSeconds();
-      return "".concat(day, "/").concat(month, "/").concat(year, "  ").concat(hours, ":").concat(minutes, ":").concat(seconds);
     }
   },
   mounted: function mounted() {
@@ -38953,7 +38984,16 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("section", { attrs: { id: "single-post" } }, [_c("PostCard")], 1)
+  return _c(
+    "section",
+    { staticClass: "container", attrs: { id: "single-post" } },
+    [
+      _vm.isLoading && !_vm.post
+        ? _c("Loader")
+        : _c("PostCard", { attrs: { post: _vm.post } }),
+    ],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -38980,14 +39020,10 @@ var render = function () {
   return _c(
     "div",
     { staticClass: "row justify-content-center", attrs: { id: "post-card" } },
-    _vm._l(_vm.posts, function (post) {
-      return _c(
+    [
+      _c(
         "div",
-        {
-          key: post.id,
-          staticClass: "card col-12 my-3",
-          staticStyle: { width: "18rem" },
-        },
+        { staticClass: "card col-12 my-3", staticStyle: { width: "18rem" } },
         [
           _c(
             "div",
@@ -38997,11 +39033,11 @@ var render = function () {
             [
               _c("div", { staticClass: "card-body" }, [
                 _c("h2", { staticClass: "card-title" }, [
-                  _vm._v(_vm._s(post.title)),
+                  _vm._v(_vm._s(_vm.post.title)),
                 ]),
                 _vm._v(" "),
                 _c("p", { staticClass: "card-text" }, [
-                  _vm._v(_vm._s(post.content)),
+                  _vm._v(_vm._s(_vm.post.content)),
                 ]),
               ]),
               _vm._v(" "),
@@ -39013,7 +39049,10 @@ var render = function () {
                     {
                       staticClass: "btn btn-primary",
                       attrs: {
-                        to: { name: "single-post", params: { id: post.id } },
+                        to: {
+                          name: "single-post",
+                          params: { id: _vm.post.id },
+                        },
                       },
                     },
                     [_vm._v("Info")]
@@ -39027,12 +39066,12 @@ var render = function () {
           _c("ul", { staticClass: "list-group list-group-flush" }, [
             _c("li", { staticClass: "list-group-item" }, [
               _c("strong", [_vm._v("Creato il: ")]),
-              _vm._v(_vm._s(_vm.getDate(post.created_at))),
+              _vm._v(_vm._s(_vm.getDate(_vm.post.created_at))),
             ]),
             _vm._v(" "),
             _c("li", { staticClass: "list-group-item" }, [
               _c("strong", [_vm._v("Modificato il: ")]),
-              _vm._v(_vm._s(_vm.getDate(post.updated_at))),
+              _vm._v(_vm._s(_vm.getDate(_vm.post.updated_at))),
             ]),
           ]),
           _vm._v(" "),
@@ -39045,7 +39084,7 @@ var render = function () {
             [
               _c(
                 "div",
-                _vm._l(post.tags, function (tag) {
+                _vm._l(_vm.post.tags, function (tag) {
                   return _c(
                     "span",
                     {
@@ -39063,22 +39102,21 @@ var render = function () {
                 "div",
                 {
                   staticClass: "m-3",
-                  class: "badge badge-pill badge-" + post.category.color,
+                  class: "badge badge-pill badge-" + _vm.post.category.color,
                 },
                 [
                   _vm._v(
-                    "\r\n                " +
-                      _vm._s(post.category.label) +
-                      "\r\n            "
+                    "\n                " +
+                      _vm._s(_vm.post.category.label) +
+                      "\n            "
                   ),
                 ]
               ),
             ]
           ),
         ]
-      )
-    }),
-    0
+      ),
+    ]
   )
 }
 var staticRenderFns = []
@@ -39115,12 +39153,15 @@ var render = function () {
             _vm.posts.length
               ? _c(
                   "div",
-                  [
-                    _c("PostCard", {
-                      attrs: { posts: _vm.posts, getDate: _vm.getDate },
-                    }),
-                  ],
-                  1
+                  _vm._l(_vm.posts, function (post) {
+                    return _c(
+                      "div",
+                      { key: post.id },
+                      [_c("PostCard", { attrs: { post: post } })],
+                      1
+                    )
+                  }),
+                  0
                 )
               : _c("p", [_vm._v("Non ci sono post")]),
           ]),
