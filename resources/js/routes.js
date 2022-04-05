@@ -12,9 +12,9 @@ const router = new VueRouter({
     mode: 'history',
 
     routes: [
-        {path: '/', components: Home, name: 'home'},
-        {path: '/contacts', components: Contacts, name: 'contacts'},
-        {path: '*', components: NotFoundPage},
+        {path: '/', component: Home, name: 'home'},
+        {path: '/contacts', component: Contacts, name: 'contacts'},
+        {path: '*', component: NotFoundPage},
     ]
 });
 
