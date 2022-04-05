@@ -10,6 +10,7 @@ import NotFoundPage from './components/pages/NotFoundPage.vue'
 const router = new VueRouter({
     
     mode: 'history',
+    linkExactActiveClassk: 'active',
 
     routes: [
         {path: '/', component: Home, name: 'home'},
