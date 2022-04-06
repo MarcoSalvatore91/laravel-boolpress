@@ -2063,6 +2063,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Contacts",
   data: function data() {
@@ -2070,8 +2073,24 @@ __webpack_require__.r(__webpack_exports__);
       form: {
         email: '',
         message: ''
-      }
+      },
+      alertMessage: ''
     };
+  },
+  methods: {
+    sendForm: function sendForm() {
+      var _this = this;
+
+      var params = {
+        email: this.form.email,
+        message: this.form.message
+      };
+      axios.post('http://localhost:8000/api/messages', params).then(function (res) {
+        _this.form.email = '';
+        _this.form.message = '';
+        _this.alertMessage = 'Email inviata con successo';
+      })["catch"](function (err) {}).then(function () {});
+    }
   }
 });
 
@@ -38914,6 +38933,14 @@ var render = function () {
     [
       _c("h1", [_vm._v("Contattaci")]),
       _vm._v(" "),
+      _vm.alertMessage
+        ? _c(
+            "div",
+            { staticClass: "alert alert-primary", attrs: { role: "alert" } },
+            [_vm._v("\n      " + _vm._s(_vm.alertMessage) + "\n    ")]
+          )
+        : _vm._e(),
+      _vm._v(" "),
       _c("div", { staticClass: "contact-form" }, [
         _c("div", { staticClass: "form-group" }, [
           _c("label", { attrs: { for: "email" } }, [_vm._v("Email")]),
@@ -38990,21 +39017,18 @@ var render = function () {
           ]),
         ]),
         _vm._v(" "),
-        _vm._m(0),
+        _c("div", { staticClass: "d-flex justify-content-end" }, [
+          _c(
+            "button",
+            { staticClass: "btn btn-primary", on: { click: _vm.sendForm } },
+            [_vm._v("Invia")]
+          ),
+        ]),
       ]),
     ]
   )
 }
-var staticRenderFns = [
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "d-flex justify-content-end" }, [
-      _c("button", { staticClass: "btn btn-primary" }, [_vm._v("Invia")]),
-    ])
-  },
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
