@@ -2073,6 +2073,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Contacts",
@@ -2087,27 +2092,45 @@ __webpack_require__.r(__webpack_exports__);
       },
       isLoading: false,
       successMessage: '',
-      errorMessage: ''
+      errorsMessage: {}
     };
   },
+  computed: {
+    hasErrorsMessage: function hasErrorsMessage() {
+      return Object.keys(this.errorsMessage).length;
+    }
+  },
   methods: {
+    validateForm: function validateForm() {
+      var errors = {};
+      if (!this.form.email.trim()) errors.email = 'La mail è obbligatoria';
+      if (!this.form.message.trim()) errors.message = 'Il messaggio è obbligatoria';
+      if (this.form.message.trim() && !this.form.email.match(/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/)) errors.email = 'La mail non è valida';
+      this.errorsMessage = errors;
+    },
     sendForm: function sendForm() {
       var _this = this;
 
-      var params = {
-        email: this.form.email,
-        message: this.form.message
-      };
-      this.isLoading = true;
-      axios.post('http://localhost:8000/api/messages', params).then(function (res) {
-        _this.form.email = '';
-        _this.form.message = '';
-        _this.successMessage = 'Email inviata con successo';
-      })["catch"](function (err) {
-        _this.errorMessage = 'Si è verificato un errore';
-      }).then(function () {
-        _this.isLoading = false;
-      });
+      this.validateForm();
+
+      if (!this.hasErrorsMessage) {
+        var params = {
+          email: this.form.email,
+          message: this.form.message
+        };
+        this.isLoading = true;
+        axios.post('http://localhost:8000/api/messages', params).then(function (res) {
+          _this.form.email = '';
+          _this.form.message = '';
+          _this.successMessage = 'Email inviata con successo';
+        })["catch"](function (err) {
+          _this.errorsMessage = {
+            error: 'Si è verificato un errore'
+          };
+        }).then(function () {
+          _this.isLoading = false;
+        });
+      }
     }
   }
 });
@@ -38961,16 +38984,23 @@ var render = function () {
                     staticClass: "alert alert-primary",
                     attrs: { role: "alert" },
                   },
-                  [_vm._v("\n        " + _vm._s(_vm.alertMessage) + "\n      ")]
+                  [
+                    _vm._v(
+                      "\n        " + _vm._s(_vm.successMessage) + "\n      "
+                    ),
+                  ]
                 )
-              : _vm.errorMessage
+              : _vm.hasErrorsMessage
               ? _c(
                   "div",
                   {
                     staticClass: "alert alert-danger",
                     attrs: { role: "alert" },
                   },
-                  [_vm._v("\n        " + _vm._s(_vm.errorMessage) + "\n      ")]
+                  _vm._l(_vm.errorsMessage, function (error, key) {
+                    return _c("li", { key: key }, [_vm._v(_vm._s(error))])
+                  }),
+                  0
                 )
               : _vm._e(),
             _vm._v(" "),
@@ -38988,6 +39018,7 @@ var render = function () {
                     },
                   ],
                   staticClass: "form-control",
+                  class: { "is-invalid": _vm.errorsMessage.email },
                   attrs: {
                     type: "email",
                     id: "email",
@@ -39030,6 +39061,7 @@ var render = function () {
                       },
                     ],
                     staticClass: "form-control",
+                    class: { "is-invalid": _vm.errorsMessage.message },
                     attrs: { id: "message", rows: "10" },
                     domProps: { value: _vm.form.message },
                     on: {
@@ -55096,14 +55128,15 @@ __webpack_require__.r(__webpack_exports__);
 /*!****************************************************!*\
   !*** ./resources/js/components/pages/Contacts.vue ***!
   \****************************************************/
-/*! exports provided: default */
+/*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Contacts_vue_vue_type_template_id_16000269___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Contacts.vue?vue&type=template&id=16000269& */ "./resources/js/components/pages/Contacts.vue?vue&type=template&id=16000269&");
 /* harmony import */ var _Contacts_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Contacts.vue?vue&type=script&lang=js& */ "./resources/js/components/pages/Contacts.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _Contacts_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _Contacts_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
@@ -55133,7 +55166,7 @@ component.options.__file = "resources/js/components/pages/Contacts.vue"
 /*!*****************************************************************************!*\
   !*** ./resources/js/components/pages/Contacts.vue?vue&type=script&lang=js& ***!
   \*****************************************************************************/
-/*! exports provided: default */
+/*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
