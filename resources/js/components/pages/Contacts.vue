@@ -1,6 +1,9 @@
 <template>
   <section id="contacts" class="container">
       <h1>Contattaci</h1>
+      <div v-if="alertMessage" class="alert alert-primary" role="alert">
+        {{ alertMessage }}
+      </div>
       <div class="contact-form">
         <div class="form-group">
           <label for="email">Email</label>
@@ -17,7 +20,7 @@
         </div>
 
         <div class="d-flex justify-content-end">
-          <button class="btn btn-primary">Invia</button>
+          <button class="btn btn-primary" @click='sendForm'>Invia</button>
         </div>
 
       </div>
@@ -33,9 +36,29 @@ data() {
     form:{
       email: '',
       message: '',
+    },
+    alertMessage: '',
+  }
+},
+
+methods: {
+  sendForm() {
+    const params = {
+      email: this.form.email,
+      message: this.form.message,
     }
+
+    axios.post('http://localhost:8000/api/messages', params)
+    .then(res => {
+      this.form.email = '';
+      this.form.message = '';
+      this.alertMessage = 'Email inviata con successo';
+    })
+    .catch(err => {})
+    .then(() => {});
   }
 }
+
 }
 </script>
 
