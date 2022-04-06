@@ -1,7 +1,9 @@
 @component('mail::message')
-# Introduction
+Nuova E-mail.
 
-The body of your message.
+<p><strong>Email: </strong>{{ $contact['email'] }}</p>
+
+<p><strong>Messaggio: </strong>{{ $contact['message'] }}</p>
 
 @component('mail::button', ['url' => ''])
 Button Text
