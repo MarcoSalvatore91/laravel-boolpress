@@ -92,9 +92,18 @@ methods: {
   
       axios.post('http://localhost:8000/api/messages', params)
       .then(res => {
-        this.form.email = '';
-        this.form.message = '';
-        this.successMessage = 'Email inviata con successo';
+
+        if(res.data.errors){
+          const { email, message } = res.data.errors;
+          const errors = {};
+          if(email) errors.email = email[0];
+          if(message) errors.message = message[0];
+          this.errorsMessage = errors;
+        } else {
+          this.form.email = "";
+          this.form.message = "";
+          this.successMessage = "Email inviata con successo";
+        }
       })
       .catch(err => {
         this.errorsMessage = { error: 'Si è verificato un errore' }; 
