@@ -2043,6 +2043,26 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Contacts"
 });
@@ -38890,7 +38910,59 @@ var staticRenderFns = [
     return _c(
       "section",
       { staticClass: "container", attrs: { id: "contacts" } },
-      [_c("h1", [_vm._v("Contatti")])]
+      [
+        _c("h1", [_vm._v("Contattaci")]),
+        _vm._v(" "),
+        _c("div", { staticClass: "contact-form" }, [
+          _c("div", { staticClass: "form-group" }, [
+            _c("label", { attrs: { for: "email" } }, [_vm._v("Email")]),
+            _vm._v(" "),
+            _c("input", {
+              staticClass: "form-control",
+              attrs: {
+                type: "email",
+                id: "email",
+                "aria-describedby": "emailHelp",
+              },
+            }),
+            _vm._v(" "),
+            _c(
+              "small",
+              {
+                staticClass: "form-text text-muted",
+                attrs: { id: "emailHelp" },
+              },
+              [_vm._v("Inserisci una e-mail valida.")]
+            ),
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-group" }, [
+            _c("div", { staticClass: "form-group" }, [
+              _c("label", { attrs: { for: "message" } }, [
+                _vm._v("Example textarea"),
+              ]),
+              _vm._v(" "),
+              _c("textarea", {
+                staticClass: "form-control",
+                attrs: { id: "message", rows: "10" },
+              }),
+              _vm._v(" "),
+              _c(
+                "small",
+                {
+                  staticClass: "form-text text-muted",
+                  attrs: { id: "emailHelp" },
+                },
+                [_vm._v("Inserisci il contenuto del messaggio.")]
+              ),
+            ]),
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "d-flex justify-content-end" }, [
+            _c("button", { staticClass: "btn btn-primary" }, [_vm._v("Invia")]),
+          ]),
+        ]),
+      ]
     )
   },
 ]
