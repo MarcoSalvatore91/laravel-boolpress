@@ -2070,6 +2070,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Contacts",
@@ -2083,7 +2086,8 @@ __webpack_require__.r(__webpack_exports__);
         message: ''
       },
       isLoading: false,
-      alertMessage: ''
+      successMessage: '',
+      errorMessage: ''
     };
   },
   methods: {
@@ -2098,8 +2102,10 @@ __webpack_require__.r(__webpack_exports__);
       axios.post('http://localhost:8000/api/messages', params).then(function (res) {
         _this.form.email = '';
         _this.form.message = '';
-        _this.alertMessage = 'Email inviata con successo';
-      })["catch"](function (err) {}).then(function () {
+        _this.successMessage = 'Email inviata con successo';
+      })["catch"](function (err) {
+        _this.errorMessage = 'Si è verificato un errore';
+      }).then(function () {
         _this.isLoading = false;
       });
     }
@@ -38948,7 +38954,7 @@ var render = function () {
       _vm.isLoading
         ? _c("Loader")
         : _c("div", [
-            _vm.alertMessage
+            _vm.successMessage
               ? _c(
                   "div",
                   {
@@ -38956,6 +38962,15 @@ var render = function () {
                     attrs: { role: "alert" },
                   },
                   [_vm._v("\n        " + _vm._s(_vm.alertMessage) + "\n      ")]
+                )
+              : _vm.errorMessage
+              ? _c(
+                  "div",
+                  {
+                    staticClass: "alert alert-danger",
+                    attrs: { role: "alert" },
+                  },
+                  [_vm._v("\n        " + _vm._s(_vm.errorMessage) + "\n      ")]
                 )
               : _vm._e(),
             _vm._v(" "),

@@ -3,8 +3,11 @@
       <h1>Contattaci</h1>
       <Loader v-if='isLoading'/>
       <div v-else>
-        <div v-if="alertMessage" class="alert alert-primary" role="alert">
+        <div v-if="successMessage" class="alert alert-primary" role="alert">
           {{ alertMessage }}
+        </div>
+        <div v-else-if="errorMessage" class="alert alert-danger" role="alert">
+          {{ errorMessage }}
         </div>
         <div class="contact-form">
           <div class="form-group">
@@ -46,7 +49,8 @@ data() {
       message: '',
     },
     isLoading: false,
-    alertMessage: '',
+    successMessage: '',
+    errorMessage: '',
   }
 },
 
@@ -62,9 +66,11 @@ methods: {
     .then(res => {
       this.form.email = '';
       this.form.message = '';
-      this.alertMessage = 'Email inviata con successo';
+      this.successMessage = 'Email inviata con successo';
     })
-    .catch(err => {})
+    .catch(err => {
+      this.errorMessage = 'Si è verificato un errore'; 
+    })
     .then(() => {
       this.isLoading = false;
     });
